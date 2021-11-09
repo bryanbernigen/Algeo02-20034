@@ -1,11 +1,20 @@
 import cv2
 import numpy as np
 import time
+import sys
+from numpy.linalg import svd
 from SVD_bener import svd_nguli
 
 
 def compressImage(imagePart, scale):
     U, S, VT = svd_nguli(imagePart)
+    #sourceFile = open('asli.txt', 'w')
+    # np.set_printoptions(threshold=sys.maxsize)
+    #print(S, file=sourceFile)
+    #print("==============================================================", file=sourceFile)
+    # sourceFile.close()
+    # exit()
+    S = np.diag(S)
     X = U[:, :scale] @ S[:scale, :scale] @ VT[:scale, :]
     X = cv2.normalize(X, None, 0, 255, cv2.NORM_MINMAX, cv2.CV_8U)
     return X

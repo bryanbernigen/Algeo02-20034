@@ -1,3 +1,4 @@
+from os import truncate
 import numpy as np
 from numpy.lib.twodim_base import diag
 
@@ -30,18 +31,20 @@ def svd_nguli(A: np):
     # singular kiri
     AxAT: np = A@AT
     singular_kiri = simultaneous_power_iteration(AxAT, len(AxAT[0]))
-    UT: np = singular_kiri[1]
-    U = UT.transpose()
+    U: np = singular_kiri[1]
 
     # Sigma
-    sourceFile = open('demo.txt', 'w')
     S = singular_kiri[0]
-    print(S, file=sourceFile)
-    sourceFile.close()
     S.setflags(write=1)
+    found = False
+    t = 0
     for i in range(len(S)):
-        if(S[i] < 0):
-            S[i] *= -1
+        if(S[i] < 0.1):
+            if(not(found)):
+                t = i
+                found = True
+            if(S[i] < 0):
+                S[i] *= -1
     S = np.sqrt(S)
     Sigma = np.diag(S)
 
@@ -49,5 +52,7 @@ def svd_nguli(A: np):
     Uinv = np.linalg.inv(U)
     Sinv = np.linalg.inv(Sigma)
     VT = Sinv@Uinv@A
+    VT = VT[:t]
 
-    return U, Sigma, VT
+    S = S[:t]
+    return U, S, VT
