@@ -1,25 +1,19 @@
-from os import truncate
 import numpy as np
 from numpy.lib.twodim_base import diag
 
 
-def simultaneous_power_iteration(A, k):
-    n, m = A.shape
-    Q = np.random.rand(n, k)
+def eig_val_and_vect(Matrix, jumlah):
+    baris, kolom = Matrix.shape
+    Q = np.random.rand(baris, jumlah)
     Q, _ = np.linalg.qr(Q)
-    Q_prev = Q
+    Prev_Q = Q
 
     for i in range(250):
-        Z = A.dot(Q)
-        Q, R = np.linalg.qr(Z)
-
-        # can use other stopping criteria as well
-        err = ((Q - Q_prev) ** 2).sum()
-        # if i % 10 == 0:
-        # print(i, err)
-
-        Q_prev = Q
-        if err < 1e-6:
+        A = Matrix.dot(Q)
+        Q, R = np.linalg.qr(A)
+        error = ((Q-Prev_Q)**2).sum()
+        Prev_Q = Q
+        if error < 1e-6:
             break
 
     return np.diag(R), Q
@@ -30,7 +24,7 @@ def svd_nguli(A: np):
 
     # singular kiri
     AxAT: np = A@AT
-    singular_kiri = simultaneous_power_iteration(AxAT, len(AxAT[0]))
+    singular_kiri = eig_val_and_vect(AxAT, len(AxAT[0]))
     U: np = singular_kiri[1]
 
     # Sigma
