@@ -1,0 +1,25 @@
+{% extends "header.html" %}
+{% block content %}
+
+<h3>Upload Image</h3>
+
+<form method="POST" action="/upload" enctype="multipart/form-data">
+    <div class="form-group">
+        {{ form.hidden_tag() }}
+        {{ form.picture.label(class="form-control-label") }}
+        {{form.picture(class="form-control-file")}}
+        {% if form.picture.errorrs %}
+        {% for error in form.picture.errors %}
+            <span class="text-danger">{{error}}</span>
+            {%endfor%}
+        {%endif%}
+        {{form.scale.label()}}
+        {{form.scale()}}
+    </div>
+    <div class="form-group">
+       {{ form.submit}}
+    </div>
+    
+</form>
+
+{% endblock %}
