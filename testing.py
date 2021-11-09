@@ -20,8 +20,14 @@ def compressImage(imagePart, scale):
     return X
 
 
-image = cv2.imread("img/cryraiden.png", cv2.IMREAD_UNCHANGED)
-scale = 100
+image = cv2.imread("img/inazumans.png", cv2.IMREAD_UNCHANGED)
+factor = float(input())
+panjang = image.shape[0]
+tinggi = image.shape[1]
+if (panjang > tinggi):
+    scale = int(factor*tinggi)
+else:
+    scale = int(factor*panjang)
 start_time = time.time()
 if (image.shape[2] == 1):
     resImage = compressImage(image, scale)
