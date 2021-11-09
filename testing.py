@@ -8,7 +8,7 @@ from SVD_bener import svd_nguli
 
 def compressImage(imagePart, scale):
     U, S, VT = svd_nguli(imagePart)
-    #sourceFile = open('asli.txt', 'w')
+    #sourceFile = open('demo.txt', 'w')
     # np.set_printoptions(threshold=sys.maxsize)
     #print(S, file=sourceFile)
     #print("==============================================================", file=sourceFile)
@@ -20,8 +20,8 @@ def compressImage(imagePart, scale):
     return X
 
 
-image = cv2.imread("mona.jpg", cv2.IMREAD_UNCHANGED)
-scale = 200
+image = cv2.imread("img/cryraiden.png", cv2.IMREAD_UNCHANGED)
+scale = 100
 start_time = time.time()
 if (image.shape[2] == 1):
     resImage = compressImage(image, scale)
