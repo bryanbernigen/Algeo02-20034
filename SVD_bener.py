@@ -9,7 +9,7 @@ def simultaneous_power_iteration(A, k):
     Q, _ = np.linalg.qr(Q)
     Q_prev = Q
 
-    for i in range(200):
+    for i in range(250):
         Z = A.dot(Q)
         Q, R = np.linalg.qr(Z)
 
@@ -39,16 +39,17 @@ def svd_nguli(A: np):
     found = False
     t = 0
     for i in range(len(S)):
-        if(S[i] < 1e-3):
-            # if(not(found)):
-            #t = i
-            #found = True
-            if(S[i] < 0):
-                S[i] *= -1
+        # if(S[i] < 1e-3):
+        # if(not(found)):
+        #t = i
+        #found = True
+        if (S[i] == 0):
+            S[i] = 1e-12
+        if(S[i] < 0):
+            S[i] *= -1
     S = np.sqrt(S)
     Sigma = np.diag(S)
 
-    # singular kanan
     Uinv = np.linalg.inv(U)
     Sinv = np.linalg.inv(Sigma)
     VT = Sinv@Uinv@A
