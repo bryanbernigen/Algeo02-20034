@@ -1,7 +1,7 @@
 from flask import Flask, render_template,redirect,url_for,request, current_app
 import secrets,os
 from PIL import Image
-from werkzeug.utils import secure_filename
+from werkzeug.utils import secure_filename, send_file, send_from_directory
 
 from forms import PostForm
 
@@ -9,26 +9,30 @@ import os
 SECRET_KEY = os.urandom(32)
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 app.config['SECRET_KEY'] = SECRET_KEY
 
-@app.route('/',methods=['GET','POST'])
-@app.route('/index',methods=['GET','POST'])
-def home():
-    form = PostForm()
-    return render_template('index.html',title='Upload', form=form)
-
-@app.route('/upload', methods=['GET','POST'])
+@app.route('/',methods=['POST', 'GET'])
+@app.route('/upload', methods=['GET', 'POSt'])
 def upload():
     form = PostForm()
-    print("a",form.validate())
-    if (request.method == "POST" and form.validate()):
-        scale = form.scale.data
-        print("masuk",scale)
+    print("a",form.validate_on_submit())
+    scale = form.scale.data
+    print(request.form)
+    filePath=''
+    if(form.validate_on_submit() and request.method == 'POST'):
         fileName=secure_filename(form.picture.data.filename)
-        form.picture.data.save('uploads/'+fileName)
+        form.picture.data.save('static/uploads/'+fileName)
         print(fileName)
+        print("masuk",scale)
+        filePath = "/uploads/"+fileName
+        print(filePath)
+    #return redirect(url_for('upload',))
+    return render_template('upload.html', form=form, filePath=filePath)
 
-        return redirect(url_for('upload', form=form, fileName=fileName))
-    return render_template('upload.html', form=form)
+@app.route('/download/<filename>')
+def download(filename):
+    return send_from_directory(app.static_folder,filename,as_attachment=True)
 
+if __name__ == '__main__':
+    app.run(debug=True)

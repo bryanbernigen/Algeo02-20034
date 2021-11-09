@@ -22,4 +22,10 @@
     
 </form>
 
+<img src="{{url_for('static', filename=filePath)}}" alt="">
+<a href=""></a>
+<img src="{{url_for('static', filename='/uploads/t.png')}}">
+{% if filePath %}
+<a href="{{url_for('static', filename=filePath)}}" download="image">Download</a>
+{%endif%}
 {% endblock %}
