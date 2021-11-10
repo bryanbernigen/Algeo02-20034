@@ -3,6 +3,9 @@ import secrets,os
 from PIL import Image
 from werkzeug.utils import secure_filename, send_file, send_from_directory
 
+
+
+from imageRead import imageRead
 from forms import PostForm
 
 import os
@@ -27,6 +30,7 @@ def upload():
         print("masuk",scale)
         filePath = "/uploads/"+fileName
         print(filePath)
+        imgJadi, waktu = imageRead('static'+filePath,scale/100)
     #return redirect(url_for('upload',))
     return render_template('upload.html', form=form, filePath=filePath)
 
