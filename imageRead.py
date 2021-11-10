@@ -55,3 +55,4 @@ def imageRead(filePath, scaling):
     return resImage, (time.time() - start_time)
     #cv2.imshow("ImageCompressed", resImage)
     #cv2.waitKey(0)
+ 
