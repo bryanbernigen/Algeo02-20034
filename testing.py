@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import time
 import sys
+import os
 from numpy.linalg import svd
 from SVD_bener import svd_nguli
 
@@ -19,8 +20,8 @@ def compressImage(imagePart, scale):
     X = cv2.normalize(X, None, 0, 255, cv2.NORM_MINMAX, cv2.CV_8U)
     return X
 
-
-image = cv2.imread("img/inazumans.png", cv2.IMREAD_UNCHANGED)
+filename = input()
+image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 factor = float(input())
 panjang = image.shape[0]
 tinggi = image.shape[1]
@@ -51,6 +52,10 @@ else:  # GBRA image
     newR = compressImage(R, scale)
     newA = compressImage(A, scale)
     resImage = cv2.merge([newB, newG, newR, newA])
+    filename = "compressed.png"
 print("--- %s seconds ---" % (time.time() - start_time))
 cv2.imshow("ImageCompressed", resImage)
-cv2.waitKey(0)
+head, tail = os.path.split(filename)
+split_name = os.path.splitext(tail)
+newname = split_name[-2] + "_compressed" + split_name[-1]
+cv2.imwrite(newname,resImage)
