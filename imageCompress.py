@@ -11,6 +11,7 @@ def compressImage(imagePart, scale):
 
 
 image = cv2.imread("imgX.jpg", cv2.IMREAD_UNCHANGED)
+scale = 10
 if (image.shape[2] == 1):
     resImage = compressImage(image, scale)
 elif (image.shape[2] == 3):

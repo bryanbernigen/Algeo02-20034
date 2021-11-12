@@ -22,10 +22,29 @@
     
 </form>
 
-<img src="{{url_for('static', filename=filePath)}}" alt="">
-<a href=""></a>
-<img src="{{url_for('static', filename='/uploads/t.png')}}">
-{% if filePath %}
-<a href="{{url_for('static', filename=filePath)}}" download="image">Download</a>
+{% if waktu==0 %}
+
+{% else %}
+    <h2>{{waktu}}s</h2>
+{%endif%}
+{% if filePath=='' %}
+
+{% else %}
+<img class="image-awal" src="{{url_for('static', filename=filePath)}}" style="width: 30%; height: auto;" >
+
+{%endif%} 
+{% if imgJadi=='' %}
+
+{% else %}
+<img class="image-akhir" src="{{url_for('static', filename=imgJadi)}}" style="width: 30%; height: auto;" >
+<a style="  background: #ffffff;
+border-radius: 5px;
+border: none;
+padding: 0.5rem 1rem 0.5rem 1rem;
+color: #56ccf2;
+display: inline-block;
+cursor: pointer;
+font-weight: 600;
+font-size: 18px;" href="{{url_for('static', filename=imgJadi)}}" download="image"> <button>Download</button> </a>
 {%endif%}
 {% endblock %}

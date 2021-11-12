@@ -4,7 +4,6 @@ from PIL import Image
 from werkzeug.utils import secure_filename, send_file, send_from_directory
 
 
-
 from imageRead import imageRead
 from forms import PostForm
 
@@ -23,6 +22,8 @@ def upload():
     scale = form.scale.data
     print(request.form)
     filePath=''
+    imgJadi =''
+    waktu=0
     if(form.validate_on_submit() and request.method == 'POST'):
         fileName=secure_filename(form.picture.data.filename)
         form.picture.data.save('static/uploads/'+fileName)
@@ -31,12 +32,9 @@ def upload():
         filePath = "/uploads/"+fileName
         print(filePath)
         imgJadi, waktu = imageRead('static'+filePath,scale/100)
-    #return redirect(url_for('upload',))
-    return render_template('upload.html', form=form, filePath=filePath)
 
-@app.route('/download/<filename>')
-def download(filename):
-    return send_from_directory(app.static_folder,filename,as_attachment=True)
+    #return redirect(url_for('upload',))
+    return render_template('upload.html', form=form, imgJadi=imgJadi, waktu=waktu, filePath=filePath)
 
 if __name__ == '__main__':
     app.run(debug=True)

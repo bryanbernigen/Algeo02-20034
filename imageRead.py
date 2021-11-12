@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import time
+import os
 import sys
 from numpy.linalg import svd
 from SVD_bener import svd_nguli
@@ -20,7 +21,8 @@ def compressImage(imagePart, scale):
     return X
 
 def imageRead(filePath, scaling):
-    image = cv2.imread(filePath, cv2.IMREAD_UNCHANGED)
+    filename = filePath
+    image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
     factor = scaling
     panjang = image.shape[0]
     tinggi = image.shape[1]
@@ -51,8 +53,14 @@ def imageRead(filePath, scaling):
         newR = compressImage(R, scale)
         newA = compressImage(A, scale)
         resImage = cv2.merge([newB, newG, newR, newA])
+        filename = "compressed.png"
     print("--- %s seconds ---" % (time.time() - start_time))
-    return resImage, (time.time() - start_time)
-    #cv2.imshow("ImageCompressed", resImage)
-    #cv2.waitKey(0)
+    cv2.imshow("ImageCompressed", resImage)
+    head, tail = os.path.split(filename)
+    split_name = os.path.splitext(tail)
+    newname = split_name[-2] + "_compressed" + split_name[-1]
+    cv2.imwrite('static/'+newname,resImage)
+    return newname, time.time() - start_time
+        #cv2.imshow("ImageCompressed", resImage)
+        #cv2.waitKey(0)
  
