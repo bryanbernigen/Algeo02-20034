@@ -55,7 +55,6 @@ def imageRead(filePath, scaling):
         resImage = cv2.merge([newB, newG, newR, newA])
         filename = "compressed.png"
     print("--- %s seconds ---" % (time.time() - start_time))
-    cv2.imshow("ImageCompressed", resImage)
     head, tail = os.path.split(filename)
     split_name = os.path.splitext(tail)
     newname = split_name[-2] + "_compressed" + split_name[-1]
