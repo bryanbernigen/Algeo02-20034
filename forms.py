@@ -8,5 +8,5 @@ from wtforms.validators import InputRequired
 
 class PostForm(FlaskForm):
     picture = FileField('Insert picture', validators=[InputRequired(),FileAllowed(['jpg', 'jpeg', 'png'], 'images only')])
-    scale = IntegerField('Insert Scale 0 ... 100', [validators.NumberRange(min=0, max=100)])
+    scale = IntegerField('Insert Scale (%)', [validators.NumberRange(min=0, max=100)])
     submit=SubmitField('submit')

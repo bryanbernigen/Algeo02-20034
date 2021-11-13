@@ -15,7 +15,7 @@ app = Flask(__name__, static_folder='static')
 app.config['SECRET_KEY'] = SECRET_KEY
 
 @app.route('/',methods=['POST', 'GET'])
-@app.route('/upload', methods=['GET', 'POSt'])
+@app.route('/upload', methods=['GET', 'POST'])
 def upload():
     form = PostForm()
     print("a",form.validate_on_submit())

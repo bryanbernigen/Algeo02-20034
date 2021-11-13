@@ -1,0 +1,86 @@
+*{
+    font-family: "Poppins", sans-serif;
+    font-weight: 100, 200, 300;
+}
+
+input{
+    background: #56ccf2;
+    font-weight: 600;
+    border: none;
+    border-color: #56ccf2;
+    border-radius: 4px;
+    padding: 0.8rem 1rem 0.8rem 1rem;
+    color: white;
+    display: inline-block;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+button{
+    background: #56ccf2;
+    font-weight: 600;
+    border: none;
+    border-color: #56ccf2;
+    border-radius: 4px;
+    padding: 0.8rem 1rem 0.8rem 1rem;
+    color: white;
+    display: inline-flex;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    margin: auto;
+}
+
+#scale{
+    background-color: aliceblue;
+    color: black;
+}
+
+form{
+    padding: 80px;
+    display: grid;
+    margin: auto;
+}
+
+.form-group{
+    display: block;
+}
+
+.container{
+    border: 0.738434px solid #dee2e6;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+}
+
+h3{
+    text-align: center;       
+}
+
+h2{
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+image{
+    overflow: hidden;
+    object-fit: cover;
+    max-width: 400px;
+}
+
+.quest{
+    display: block;
+    margin: 10px;
+}
+.submit input{
+    margin-left: 10px;
+}
+
+.images{
+    display: flex;
+    margin: auto;
+    width: fit-content;
+}

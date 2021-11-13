@@ -1,50 +1,75 @@
 {% extends "header.html" %}
 {% block content %}
 
-<h3>Upload Image</h3>
+<h2>Upload Image</h2>
 
 <form method="POST" action="/upload" enctype="multipart/form-data">
     <div class="form-group">
-        {{ form.hidden_tag() }}
+        <div class="quest">
+                    {{ form.hidden_tag() }}
         {{ form.picture.label(class="form-control-label") }}
-        {{form.picture(class="form-control-file")}}
-        {% if form.picture.errorrs %}
+
+
+        </div>
+            <div class="quest">
+                        {{form.picture(class="form-control-file")}}
+                        {% if form.picture.errorrs %}
         {% for error in form.picture.errors %}
             <span class="text-danger">{{error}}</span>
             {%endfor%}
         {%endif%}
+            </div>
+        <div class="quest">
         {{form.scale.label()}}
-        {{form.scale()}}
+        </div>
+        <div class="quest">
+        {{form.scale()}} 
+        </div>
+
+
     </div>
-    <div class="form-group">
+    <div class="submit">
        {{ form.submit}}
     </div>
     
 </form>
-
-{% if waktu==0 %}
-
-{% else %}
-    <h2>{{waktu}}s</h2>
-{%endif%}
+<div class="images">
 {% if filePath=='' %}
 
 {% else %}
-<img class="image-awal" src="{{url_for('static', filename=filePath)}}" style="width: 30%; height: auto;" >
+<div class="container">
+    <img class="image-awal" src="{{url_for('static', filename=filePath)}}" style="height: auto;" >
+</div>
+
 
 {%endif%} 
 {% if imgJadi=='' %}
 
 {% else %}
-<img class="image-akhir" src="{{url_for('static', filename=imgJadi)}}" style="width: 30%; height: auto;" >
-<a style="  background: #ffffff;
-border-radius: 5px;
-border: none;
-padding: 0.5rem 1rem 0.5rem 1rem;
-color: #56ccf2;
-display: inline-block;
-cursor: pointer;
-font-weight: 600;
-font-size: 18px;" href="{{url_for('static', filename=imgJadi)}}" download="image"> <button>Download</button> </a>
+
+<div class="container">
+    <img class="image-akhir" src="{{url_for('static', filename=imgJadi)}}" style="height: auto;" >
+</div>    
+</div>
+<div class="images">
+    <a style="  background: #ffffff;
+    border-radius: 5px;
+    border: none;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    color: #56ccf2;
+    display: inline-block;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;" href="{{url_for('static', filename=imgJadi)}}" download="image"> <button>Download</button> </a>
+</div>
+
+{%endif%}
+{% if waktu==0 %}
+
+{% else %}
+        <h3>Waktu Proses</h3>
+        <h3>{{waktu}} s</h3>
+
+
 {%endif%}
 {% endblock %}
