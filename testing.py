@@ -25,6 +25,7 @@ image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 factor = float(input())
 panjang = image.shape[0]
 tinggi = image.shape[1]
+print("bytes",image.nbytes)
 if (panjang > tinggi):
     scale = int(factor*tinggi)
 else:
@@ -55,7 +56,8 @@ else:  # GBRA image
     filename = "compressed.png"
 print("--- %s seconds ---" % (time.time() - start_time))
 cv2.imshow("ImageCompressed", resImage)
+print("bytes",image.nbytes)
 head, tail = os.path.split(filename)
 split_name = os.path.splitext(tail)
 newname = split_name[-2] + "_compressed" + split_name[-1]
-cv2.imwrite(newname,resImage)
+resImage.save(newname)
