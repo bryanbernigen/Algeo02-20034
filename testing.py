@@ -5,6 +5,7 @@ import sys
 import os
 from numpy.linalg import svd
 from SVD_bener import svd_nguli
+from PIL import Image
 
 
 def compressImage(imagePart, scale):
@@ -19,6 +20,7 @@ def compressImage(imagePart, scale):
     X = U[:, :scale] @ S[:scale, :scale] @ VT[:scale, :]
     X = cv2.normalize(X, None, 0, 255, cv2.NORM_MINMAX, cv2.CV_8U)
     return X
+
 
 filename = input()
 image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
@@ -40,7 +42,7 @@ elif (image.shape[2] == 3):
     newB = compressImage(B, scale)
     newG = compressImage(G, scale)
     newR = compressImage(R, scale)
-    resImage = cv2.merge([newB, newG, newR])
+    resImage = cv2.merge([newR, newG, newB])
 else:  # GBRA image
     (B, G, R, A) = cv2.split(image)
     B = B.astype(float)
@@ -51,11 +53,12 @@ else:  # GBRA image
     newG = compressImage(G, scale)
     newR = compressImage(R, scale)
     newA = compressImage(A, scale)
-    resImage = cv2.merge([newB, newG, newR, newA])
+    resImage = cv2.merge([newR, newG, newB, newA])
     filename = "compressed.png"
 print("--- %s seconds ---" % (time.time() - start_time))
 cv2.imshow("ImageCompressed", resImage)
 head, tail = os.path.split(filename)
 split_name = os.path.splitext(tail)
 newname = split_name[-2] + "_compressed" + split_name[-1]
-cv2.imwrite(newname,resImage)
+im = Image.fromarray(resImage)
+im.save(newname, optimize=True)
