@@ -25,6 +25,7 @@ def compressImage(imagePart, scale):
 def imageRead(filePath, scaling):
     filename = filePath
     image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+    #tes = np.linalg.svd(image)
     factor = scaling
     panjang = image.shape[0]
     tinggi = image.shape[1]
@@ -33,6 +34,7 @@ def imageRead(filePath, scaling):
     else:
         scale = int(factor*panjang)
     start_time = time.time()
+    c_rate = (panjang*tinggi)/(scale * (panjang+tinggi+1))
     if (image.shape[2] == 1):
         resImage = compressImage(image, scale)
     elif (image.shape[2] == 3):

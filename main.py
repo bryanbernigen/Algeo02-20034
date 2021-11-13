@@ -31,10 +31,10 @@ def upload():
         print("masuk",scale)
         filePath = "/uploads/"+fileName
         print(filePath)
-        imgJadi, waktu = imageRead('static'+filePath,scale/100)
+        imgJadi, waktu, scale = imageRead('static'+filePath,scale/100)
 
     #return redirect(url_for('upload',))
-    return render_template('upload.html', form=form, imgJadi=imgJadi, waktu=waktu, filePath=filePath)
+    return render_template('upload.html', form=form, imgJadi=imgJadi, waktu=waktu, filePath=filePath, scale=scale)
 
 if __name__ == '__main__':
     app.run(debug=True)
