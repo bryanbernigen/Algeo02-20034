@@ -61,4 +61,4 @@ head, tail = os.path.split(filename)
 split_name = os.path.splitext(tail)
 newname = split_name[-2] + "_compressed" + split_name[-1]
 im = Image.fromarray(resImage)
-im.save(newname, optimize=True)
+im.save('static/'+newname, optimize=True)

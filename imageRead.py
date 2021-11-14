@@ -24,6 +24,7 @@ def compressImage(imagePart, scale):
 
 def imageRead(filePath, scaling):
     filename = filePath
+    print(filename)
     image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
     #tes = np.linalg.svd(image)
     factor = scaling
@@ -64,6 +65,6 @@ def imageRead(filePath, scaling):
     newname = split_name[-2] + "_compressed" + split_name[-1]
     im = Image.fromarray(resImage)
     im.save('static/'+newname, optimize=True)
-    return newname, time.time() - start_time
+    return newname, time.time() - start_time,c_rate
     #cv2.imshow("ImageCompressed", resImage)
     # cv2.waitKey(0)
