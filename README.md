@@ -11,9 +11,6 @@
 * [Usage](#usage)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
-* [Acknowledgements](#acknowledgements)
-* [Contact](#contact)
-<!-- * [License](#license) -->
 
 
 ## General Information
@@ -55,16 +52,14 @@ In terminal:
 
 
 ## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
 Method 1:
-  `source venv/bin/activate`
-  `cd src`
-  `export FLASK_APP=main`
+  1. `source venv/bin/activate`
+  2. `cd src`
+  3. `export FLASK_APP=main`
 
-method 2:
-  `cd src`
-  `python main.py`
+Method 2:
+  1. `cd src`
+  2. `python main.py`
 
 
 ## Project Status
