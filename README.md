@@ -49,7 +49,12 @@ Proceed to describe how to install / setup one's local environment / get started
 How does one go about using it?
 Provide various use cases and code examples here.
 
-`write-your-code-here`
+`source venv/bin/activate`
+`cd src`
+`export FLASK_APP=main`
+or
+`cd src`
+`python main.py`
 
 
 ## Project Status
